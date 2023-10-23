@@ -14,15 +14,21 @@ function App() {
   const CurrentView = views[tab];
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-between px-[20%]">
-      <div className="flex flex-col justify-center min-h-[95vh]">
-        <div className="grid justify-items-center p-9 bg-light-gray rounded-xl">
+    <div className="w-full min-h-screen flex flex-col items-center justify-between">
+      <div className="flex flex-col items-center basis-[75%] max-w-[50%] min-w-[50%] justify-center min-h-[95vh]">
+        <div className="flex flex-col w-full justify-items-center px-[24px] bg-white rounded-xl">
           <Tabs
             value={tab}
             onChange={handleTabChange}
             textColor="secondary"
             indicatorColor="secondary"
             aria-label="tabs"
+            sx={{
+              display: "flex",
+              "& .MuiTabs-flexContainer": {
+                justifyContent: "center",
+              },
+            }}
           >
             <Tab value="one" label="Track" />
             <Tab value="two" label="Login" />

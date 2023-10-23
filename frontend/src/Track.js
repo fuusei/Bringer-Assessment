@@ -29,7 +29,9 @@ function Track() {
         setHistory(res.data);
       })
       .catch((err) => {
-        setFailMsg(err.code);
+        if (err.code === "ERR_BAD_REQUEST")
+          setFailMsg("Bad request, please enter a valid tracking number.");
+        else setFailMsg(err.code);
       })
       .finally(() => {
         setLoading(false);
@@ -37,10 +39,11 @@ function Track() {
   };
 
   return (
-    <div className="w-[600px]">
+    <div className="flex flex-col items-center">
       <TextField
         color="secondary"
         fullWidth
+        sx={{ maxWidth: "650px" }}
         required
         onChange={(e) => setTrackingNumber(e.target.value)}
         placeholder="Enter a tracking number"
@@ -55,22 +58,22 @@ function Track() {
           ),
         }}
       />
-      <div className="flex justify-center">
-        <LoadingButton
-          startIcon={<LocalShipping />}
-          color="secondary"
-          variant="contained"
-          sx={{ m: 1, py: 1, px: 2 }}
-          disabled={disable}
-          loading={loading}
-          onClick={handleSubmit}
-        >
-          <span>Track</span>
-        </LoadingButton>
-      </div>
+      <LoadingButton
+        startIcon={<LocalShipping />}
+        color="secondary"
+        variant="contained"
+        sx={{ m: 1, py: 1, px: 2 }}
+        disabled={disable}
+        loading={loading}
+        onClick={handleSubmit}
+      >
+        <span>Track</span>
+      </LoadingButton>
       {Object.keys(history).length ? <Timeline history={history} /> : null}
       {failMsg ? (
-        <div className="text-red-700 text-lg font-semibold">{failMsg}</div>
+        <div className="text-red-700 text-lg font-semibold flex justify-center">
+          {failMsg}
+        </div>
       ) : null}
     </div>
   );

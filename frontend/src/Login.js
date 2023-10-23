@@ -46,11 +46,12 @@ function Login() {
   };
 
   return (
-    <div className="w-[400px]">
+    <div className="flex flex-col items-center">
       <TextField
         color="secondary"
         fullWidth
         required
+        sx={{ maxWidth: "650px" }}
         onChange={(e) => setUsername(e.target.value)}
         placeholder="Username"
         margin="normal"
@@ -68,6 +69,7 @@ function Login() {
         color="secondary"
         fullWidth
         required
+        sx={{ maxWidth: "650px" }}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
         margin="normal"
@@ -107,7 +109,7 @@ function Login() {
         </LoadingButton>
       </div>
       {token ? (
-        <div>
+        <div className="pb-4">
           <div className="font-bold text-lg">Token:</div>
           <div className="text-sm break-all">{token}</div>
         </div>
